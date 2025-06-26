@@ -1,12 +1,23 @@
 import type { ReactNode } from "react"
 import { Link } from "react-router-dom"
-import { Sword, Github } from "lucide-react"
+import { Sword, Github, Home } from "lucide-react"
+import { Button } from "./ui/Button"
 
 interface LayoutProps {
   children: ReactNode
 }
 
 export function Layout({ children }: LayoutProps) {
+
+    const navigation = [
+    {
+      name: "Início",
+      href: "/",
+      icon: Home,
+      current: location.pathname === "/",
+    },
+  ]
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
       {/* Header */}
@@ -32,6 +43,30 @@ export function Layout({ children }: LayoutProps) {
           </div>
         </div>
       </header>
+
+      {/* Navigation */}
+      <nav className="border-b border-white/10 bg-black/10 backdrop-blur-sm">
+        <div className="container mx-auto px-4 py-3">
+          <div className="flex flex-wrap gap-2 justify-center md:justify-start">
+            {navigation.map((item) => {
+              const Icon = item.icon
+              return (
+                <Button
+                  key={item.name}
+                  asChild
+                  variant={item.current ? "default" : "ghost"}
+                  className={`"bg-white/20 text-white" : "text-gray-300 hover:text-white hover:bg-white/10"`}
+                >
+                  <Link to={item.href} className="flex items-center gap-2">
+                    <Icon className="w-4 h-4" />
+                    {item.name}
+                  </Link>
+                </Button>
+              )
+            })}
+          </div>
+        </div>
+      </nav>
 
       {/* Main Content */}
       <main className="container mx-auto px-4 py-8">{children}</main>
