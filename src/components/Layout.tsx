@@ -1,21 +1,37 @@
 import type { ReactNode } from "react"
-import { Link } from "react-router-dom"
-import { Sword, Github, Home } from "lucide-react"
-import { Button } from "./ui/Button"
+import { Link, useLocation } from "react-router-dom"
+import { Sword, Home, Users, Plus, Github } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { useMonsterStore } from "@/store/useMonsterStore"
 
 interface LayoutProps {
   children: ReactNode
 }
 
 export function Layout({ children }: LayoutProps) {
+  const location = useLocation()
+  const { monsters } = useMonsterStore()
 
-    const navigation = [
+  const navigation = [
     {
       name: "Início",
       href: "/",
       icon: Home,
       current: location.pathname === "/",
     },
+    {
+      name: "Monstros",
+      href: "/monsters",
+      icon: Users,
+      current: location.pathname === "/monsters",
+      badge: monsters.length,
+    },
+    {
+      name: "Criar",
+      href: "/create",
+      icon: Plus,
+      current: location.pathname === "/create",
+    }
   ]
 
   return (
@@ -33,7 +49,7 @@ export function Layout({ children }: LayoutProps) {
             </Link>
 
             <a
-              href="https://github.com/micaelvitor/reactMonsterBattle"
+              href="https://github.com"
               target="_blank"
               rel="noopener noreferrer"
               className="text-white hover:text-yellow-400 transition-colors"
@@ -55,11 +71,16 @@ export function Layout({ children }: LayoutProps) {
                   key={item.name}
                   asChild
                   variant={item.current ? "default" : "ghost"}
-                  className={`"bg-white/20 text-white" : "text-gray-300 hover:text-white hover:bg-white/10"`}
-                >
+                  className={`
+                    ${item.current ? "bg-white/20 text-white" : "text-gray-300 hover:text-white hover:bg-white/10"}`}>
                   <Link to={item.href} className="flex items-center gap-2">
                     <Icon className="w-4 h-4" />
                     {item.name}
+                    {item.badge !== undefined && (
+                      <span className="bg-yellow-400 text-black text-xs px-2 py-0.5 rounded-full font-bold">
+                        {item.badge}
+                      </span>
+                    )}
                   </Link>
                 </Button>
               )
