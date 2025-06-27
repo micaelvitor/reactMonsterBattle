@@ -11,8 +11,7 @@ export function BattlePage() {
   const { monsters } = useMonsterStore()
 
   useEffect(() => {
-    if (monsters.length < 2) {
-    }
+    if (monsters.length < 2){}
   }, [monsters.length])
 
   if (monsters.length < 2) {
