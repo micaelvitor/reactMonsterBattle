@@ -1,6 +1,10 @@
 # Monster Battle Arena 🐉⚔️
 
-A monster battle application built in **Vanilla React** for the **Revi** technical challenge. Create epic monsters, set their attributes, and let them fight for supremacy!
+A monster battle application built in **pure React** for the **Revi** technical challenge. Create epic monsters, set their attributes, and let them fight for supremacy!
+
+## ✨ Live Demo
+
+You can check out the live application here: **[https://react-monster-battle.vercel.app/](https://react-monster-battle.vercel.app/)**
 
 ## 🎯 Features
 

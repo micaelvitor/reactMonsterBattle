@@ -62,7 +62,7 @@ export function Layout({ children }: LayoutProps) {
 
             <div className="flex items-center gap-4">
               <a
-                href="https://github.com"
+                href="https://github.com/micaelvitor/reactMonsterBattle"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white hover:text-yellow-400 transition-colors"
