@@ -1,5 +1,3 @@
-"use client"
-
 import { useState } from "react"
 import { useMonsterStore } from "@/store/useMonsterStore"
 import { MonsterCard } from "@/components/MonsterCard"
@@ -19,7 +17,7 @@ export function BattleArena() {
   const [selectedMonster2, setSelectedMonster2] = useState<string>("")
   const [battleResult, setBattleResult] = useState<BattleResultType | null>(null)
   const [isLoading, setBattleLoading] = useState(false)
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
 
   const monster1 = monsters.find((m) => m.id === selectedMonster1)
   const monster2 = monsters.find((m) => m.id === selectedMonster2)
@@ -31,12 +29,10 @@ export function BattleArena() {
 
     setBattleLoading(true)
     setBattleResult(null)
-
-    // Reset HP dos monstros antes da batalha
     resetMonsterHp(monster1.id)
     resetMonsterHp(monster2.id)
 
-    // Simular delay para efeito dramático
+    // Simulate Delay for a dramatic moment xD
     await new Promise((resolve) => setTimeout(resolve, 1000))
 
     try {
