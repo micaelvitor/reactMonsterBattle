@@ -38,7 +38,6 @@ export function MonsterForm({ onSuccess }: MonsterFormProps) {
     addMonster(formData)
     toast.success(`${formData.name} foi criado com sucesso!`)
 
-    // Reset form
     setFormData({
       name: "",
       attack: 10,
@@ -68,20 +67,20 @@ export function MonsterForm({ onSuccess }: MonsterFormProps) {
     ]
 
     const randomName = names[Math.floor(Math.random() * names.length)]
-    const baseStats = 8 + Math.floor(Math.random() * 15) // 8-22
+    const baseStats = 8 + Math.floor(Math.random() * 15)
 
     setFormData({
       name: randomName,
       attack: baseStats + Math.floor(Math.random() * 10),
       defense: baseStats + Math.floor(Math.random() * 10),
       speed: baseStats + Math.floor(Math.random() * 10),
-      hp: 80 + Math.floor(Math.random() * 40), // 80-120
+      hp: 80 + Math.floor(Math.random() * 40),
       imageUrl: `https://placehold.co/200x128?text=${encodeURIComponent(randomName).replace(/%20/g, "+")}`,
     })
   }
 
   return (
-    <Card className="max-w-2xl mx-auto bg-black/20 backdrop-blur-sm border-white/20">
+    <Card className="w-full max-w-4xl mx-auto bg-black/20 backdrop-blur-sm border-white/20 animate-in fade-in-0 slide-in-from-bottom-5 duration-700">
       <CardHeader>
         <CardTitle className="text-2xl text-white flex items-center gap-2">
           <Plus className="w-6 h-6" />
@@ -93,41 +92,36 @@ export function MonsterForm({ onSuccess }: MonsterFormProps) {
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Bloco de nome e imagem */}
+            <div className="space-y-4 animate-in fade-in-0 slide-in-from-bottom-5 duration-500" style={{ animationDelay: `0ms`, animationFillMode: "backwards" }}>
               <div>
-                <Label htmlFor="name" className="text-white">
-                  Nome do Monstro
-                </Label>
+                <Label htmlFor="name" className="text-white">Nome do Monstro</Label>
                 <Input
                   id="name"
                   value={formData.name}
                   onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))}
                   placeholder="Ex: Dragão Flamejante"
-                  className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
+                  className="w-full bg-white/10 border-white/20 text-white placeholder:text-gray-400"
                 />
               </div>
-
               <div>
-                <Label htmlFor="imageUrl" className="text-white">
-                  URL da Imagem (opcional)
-                </Label>
+                <Label htmlFor="imageUrl" className="text-white">URL da Imagem (opcional)</Label>
                 <Input
                   id="imageUrl"
                   value={formData.imageUrl}
                   onChange={(e) => setFormData((prev) => ({ ...prev, imageUrl: e.target.value }))}
                   placeholder="https://exemplo.com/imagem.jpg"
-                  className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
+                  className="w-full bg-white/10 border-white/20 text-white placeholder:text-gray-400"
                 />
               </div>
             </div>
 
-            <div className="space-y-4">
+            {/* Bloco de atributos */}
+            <div className="space-y-4 animate-in fade-in-0 slide-in-from-bottom-5 duration-500" style={{ animationDelay: `150ms`, animationFillMode: "backwards" }}>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="attack" className="text-white">
-                    Ataque
-                  </Label>
+                  <Label htmlFor="attack" className="text-white">Ataque</Label>
                   <Input
                     id="attack"
                     type="number"
@@ -135,32 +129,25 @@ export function MonsterForm({ onSuccess }: MonsterFormProps) {
                     max="100"
                     value={formData.attack}
                     onChange={(e) => setFormData((prev) => ({ ...prev, attack: Number.parseInt(e.target.value) || 1 }))}
-                    className="bg-white/10 border-white/20 text-white"
+                    className="w-full bg-white/10 border-white/20 text-white"
                   />
                 </div>
                 <div>
-                  <Label htmlFor="defense" className="text-white">
-                    Defesa
-                  </Label>
+                  <Label htmlFor="defense" className="text-white">Defesa</Label>
                   <Input
                     id="defense"
                     type="number"
                     min="1"
                     max="100"
                     value={formData.defense}
-                    onChange={(e) =>
-                      setFormData((prev) => ({ ...prev, defense: Number.parseInt(e.target.value) || 1 }))
-                    }
-                    className="bg-white/10 border-white/20 text-white"
+                    onChange={(e) => setFormData((prev) => ({ ...prev, defense: Number.parseInt(e.target.value) || 1 }))}
+                    className="w-full bg-white/10 border-white/20 text-white"
                   />
                 </div>
               </div>
-
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="speed" className="text-white">
-                    Velocidade
-                  </Label>
+                  <Label htmlFor="speed" className="text-white">Velocidade</Label>
                   <Input
                     id="speed"
                     type="number"
@@ -168,13 +155,11 @@ export function MonsterForm({ onSuccess }: MonsterFormProps) {
                     max="100"
                     value={formData.speed}
                     onChange={(e) => setFormData((prev) => ({ ...prev, speed: Number.parseInt(e.target.value) || 1 }))}
-                    className="bg-white/10 border-white/20 text-white"
+                    className="w-full bg-white/10 border-white/20 text-white"
                   />
                 </div>
                 <div>
-                  <Label htmlFor="hp" className="text-white">
-                    HP
-                  </Label>
+                  <Label htmlFor="hp" className="text-white">HP</Label>
                   <Input
                     id="hp"
                     type="number"
@@ -182,14 +167,15 @@ export function MonsterForm({ onSuccess }: MonsterFormProps) {
                     max="500"
                     value={formData.hp}
                     onChange={(e) => setFormData((prev) => ({ ...prev, hp: Number.parseInt(e.target.value) || 1 }))}
-                    className="bg-white/10 border-white/20 text-white"
+                    className="w-full bg-white/10 border-white/20 text-white"
                   />
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="flex gap-4">
+          {/* Ações */}
+          <div className="flex flex-col sm:flex-row gap-4 animate-in fade-in-0 slide-in-from-bottom-5 duration-500" style={{ animationDelay: `300ms`, animationFillMode: "backwards" }}>
             <Button
               type="button"
               variant="outline"

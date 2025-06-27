@@ -3,13 +3,15 @@ import { Layout } from "@/components/Layout"
 import { MonsterList } from "@/features/monster/MonsterList"
 import { MonsterForm } from "@/features/monster/MonsterForm"
 import { NotFound } from "@/pages/NotFound"
+import { HomePage } from "@/pages/Home"
+
 
 export function App() {
   return (
     <Router>
       <Layout>
         <Routes>
-          <Route path="/" element={<>'Salve'</>} />
+          <Route path="/" element={<HomePage />} />
           <Route path="/monsters" element={<MonsterList />} />
           <Route path="/create" element={<MonsterForm />} />
           <Route path="*" element={<NotFound />} />
