@@ -144,9 +144,13 @@ export function HomePage() {
                     className={`w-full bg-gradient-to-r ${feature.color} hover:opacity-90`}
                     disabled={feature.disabled}
                   >
-                    <Link to={feature.href}>
-                      {feature.disabled ? "Precisa de 2+ monstros" : "Acessar"}
-                    </Link>
+                    {feature.disabled ? (
+                      <Link to={'/create'}>
+                        Precisa de 2+ monstros
+                      </Link>
+                    ) : (
+                      <Link to={feature.href}>Acessar</Link>
+                    )}
                   </Button>
                 </CardContent>
               </Card>
@@ -158,7 +162,7 @@ export function HomePage() {
 
       {/* Getting Started */}
       {monsters.length === 0 && (
-        <Card className="bg-gradient-to-r from-purple-600/20 to-blue-600/20 backdrop-blur-sm border-purple-400/30">
+        <Card className="bg-gradient-to-r from-#3a1b3a-600/20 to-blue-600/20 backdrop-blur-sm border-purple-400/30">
           <CardHeader className="text-center">
             <CardTitle className="text-2xl text-white">🚀 Comece sua jornada!</CardTitle>
             <CardDescription className="text-gray-300 text-lg">
