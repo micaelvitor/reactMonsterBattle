@@ -130,7 +130,7 @@ export function Layout({ children }: LayoutProps) {
         <div className="container mx-auto px-4 py-6">
           <div className="text-center text-gray-300">
             <p className="mb-2">
-              {t("footer.madeWith")} <span className="text-yellow-400 font-bold">Revi</span>
+              {t("footer.madeWith")}
             </p>
             <p className="text-sm">{t("footer.stack")}</p>
           </div>
