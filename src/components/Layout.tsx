@@ -35,7 +35,7 @@ export function Layout({ children }: LayoutProps) {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
+    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex flex-col">
       {/* Header */}
       <header className="border-b border-white/10 bg-black/20 backdrop-blur-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
@@ -90,10 +90,12 @@ export function Layout({ children }: LayoutProps) {
       </nav>
 
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-8">{children}</main>
+      <main className="container mx-auto px-4 py-8 flex-grow animate-in fade-in-0 slide-in-from-top-5 duration-500">
+        {children}
+      </main>
 
       {/* Footer */}
-      <footer className="border-t border-white/10 bg-black/20 backdrop-blur-sm mt-16">
+      <footer className="border-t border-white/10 bg-black/20 backdrop-blur-sm">
         <div className="container mx-auto px-4 py-6">
           <div className="text-center text-gray-300">
             <p className="mb-2">
