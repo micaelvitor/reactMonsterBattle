@@ -1,6 +1,6 @@
 import type { ReactNode } from "react"
 import { Link, useLocation } from "react-router-dom"
-import { Sword, Home, Users, Plus, Github } from "lucide-react"
+import { Sword, Home, Users, Plus, Github, Trophy } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useMonsterStore } from "@/store/useMonsterStore"
 
@@ -31,7 +31,14 @@ export function Layout({ children }: LayoutProps) {
       href: "/create",
       icon: Plus,
       current: location.pathname === "/create",
-    }
+    },
+    {
+      name: "Batalha",
+      href: "/battle",
+      icon: Trophy,
+      current: location.pathname === "/battle",
+      disabled: monsters.length < 2,
+    },
   ]
 
   return (

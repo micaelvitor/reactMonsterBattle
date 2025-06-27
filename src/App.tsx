@@ -1,9 +1,11 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import { Layout } from "@/components/Layout"
-import { MonsterList } from "@/features/monster/MonsterList"
-import { MonsterForm } from "@/features/monster/MonsterForm"
 import { NotFound } from "@/pages/NotFound"
 import { HomePage } from "@/pages/Home"
+import { MonstersPage } from "@/pages/MonstersPage"
+import { BattlePage } from "@/pages/BattlePage"
+import { CreateMonsterPage } from "./pages/CreateMonsterPage"
+
 
 
 export function App() {
@@ -12,8 +14,9 @@ export function App() {
       <Layout>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/monsters" element={<MonsterList />} />
-          <Route path="/create" element={<MonsterForm />} />
+          <Route path="/monsters" element={<MonstersPage />} />
+          <Route path="/create" element={<CreateMonsterPage />} />
+          <Route path="/battle" element={<BattlePage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Layout>

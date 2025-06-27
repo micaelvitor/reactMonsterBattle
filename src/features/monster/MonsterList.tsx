@@ -8,8 +8,11 @@ export function MonsterList() {
   const { monsters } = useMonsterStore()
   if (monsters.length === 0) {
     return (
-      <Card className="max-w-2xl mx-auto bg-black/20 backdrop-blur-sm border-white/20">
-        <CardHeader className="text-center">
+      <Card className="max-w-2xl mx-auto bg-black/20 backdrop-blur-sm border-white/20 animate-in fade-in-0 slide-in-from-bottom-5 duration-500">
+        <CardHeader
+          className="text-center animate-in fade-in-0 slide-in-from-bottom-5 duration-500"
+          style={{ animationDelay: "100ms", animationFillMode: "backwards" }}
+        >
           <CardTitle className="text-2xl text-white flex items-center justify-center gap-2">
             <Users className="w-6 h-6" />
             Nenhum Monstro Criado
@@ -18,18 +21,29 @@ export function MonsterList() {
             Crie seu primeiro monstro para começar as batalhas épicas!
           </CardDescription>
         </CardHeader>
+
         <CardContent className="text-center">
-          <Link to="/create" className="group inline-block" aria-label="Criar novo monstro">
+          <Link
+            to="/create"
+            className="group inline-block animate-in fade-in-0 slide-in-from-bottom-5 duration-500"
+            style={{ animationDelay: "200ms", animationFillMode: "backwards" }}
+            aria-label="Criar novo monstro"
+          >
             <div className="w-32 h-32 mx-auto mb-4 rounded-full bg-white/10 flex items-center justify-center transition-all duration-300 group-hover:bg-white/20 group-hover:scale-110 cursor-pointer">
               <Plus className="w-16 h-16 text-gray-400 transition-colors group-hover:text-white" />
             </div>
           </Link>
-          <p className="text-gray-400 mb-4">Clique no botão para criar seu primeiro guerreiro!</p>
+          <p
+            className="text-gray-400 mb-4 animate-in fade-in-0 slide-in-from-bottom-5 duration-500"
+            style={{ animationDelay: "300ms", animationFillMode: "backwards" }}
+          >
+            Clique no botão para criar seu primeiro guerreiro!
+          </p>
         </CardContent>
       </Card>
     )
   }
-
+  
   return (
     <div className="space-y-6">
       <div className="text-center">
