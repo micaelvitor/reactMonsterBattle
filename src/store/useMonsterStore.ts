@@ -9,12 +9,15 @@ interface MonsterStore {
   resetMonsterHp: (id: string) => void
   updateMonsterHp: (id: string, hp: number) => void
   updateMonster: (updated: Monster) => void
+  totalBattles: number
+  incrementTotalBattles: () => void
 }
 
 export const useMonsterStore = create<MonsterStore>()(
   persist(
     (set) => ({
       monsters: [],
+      totalBattles: 0,
 
       addMonster: (monsterData) => {
         const newMonster: Monster = {
@@ -50,6 +53,12 @@ export const useMonsterStore = create<MonsterStore>()(
           monsters: state.monsters.map((monster) =>
             monster.id === id ? { ...monster, hp: Math.max(0, hp) } : monster,
           ),
+        }))
+      },
+
+      incrementTotalBattles: () => {
+        set((state) => ({
+          totalBattles: state.totalBattles + 1,
         }))
       },
     }),

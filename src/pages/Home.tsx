@@ -6,11 +6,11 @@ import { Badge } from "../components/ui/badge"
 import { Sword, Users, Plus, Trophy, Zap, Shield, Heart, Star } from "lucide-react"
 
 export function HomePage() {
-  const { monsters } = useMonsterStore()
+  const { monsters, totalBattles } = useMonsterStore()
 
   const stats = {
     totalMonsters: monsters.length,
-    totalBattles: 0,
+    totalBattles: totalBattles || 0,
     averageAttack:
       monsters.length > 0 ? Math.round(monsters.reduce((sum, m) => sum + m.attack, 0) / monsters.length) : 0,
     averageDefense:
