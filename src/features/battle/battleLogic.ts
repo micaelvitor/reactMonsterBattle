@@ -1,7 +1,11 @@
 import type { Monster, BattleRound, BattleResult } from "@/models/Monster"
 import { useMonsterStore } from "@/store/useMonsterStore"
 
-export function battleLogic(monster1: Monster, monster2: Monster): BattleResult {
+export function battleLogic(
+  monster1: Monster,
+  monster2: Monster,
+  t: (key: string, options?: any) => string
+): BattleResult {
   const fighter1: Monster = { ...monster1 }
   const fighter2: Monster = { ...monster2 }
 
@@ -37,7 +41,7 @@ export function battleLogic(monster1: Monster, monster2: Monster): BattleResult 
       damage,
       attackerHpAfter: attacker.hp,
       defenderHpAfter: defender.hp,
-      description: `${attacker.name} ataca ${defender.name} causando ${damage} de dano!`,
+      description: t("battleLogic.attackDescription", { attacker: attacker.name, defender: defender.name, damage }),
     }
 
     rounds.push(round)
@@ -58,11 +62,9 @@ export function battleLogic(monster1: Monster, monster2: Monster): BattleResult 
     }
   }
 
-  // Determinar vencedor e perdedor
   const winner = fighter1.hp > 0 ? fighter1 : fighter2
   const loser = fighter1.hp <= 0 ? fighter1 : fighter2
 
-  // Incrementa o contador de batalhas no final de cada batalha
   useMonsterStore.getState().incrementTotalBattles()
 
   return {

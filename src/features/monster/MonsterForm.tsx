@@ -7,6 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Plus, Sparkles, RotateCcw, Pencil } from "lucide-react"
 import { toast } from "sonner"
 import type { Monster } from "@/models/Monster"
+import { useTranslation } from "react-i18next"
 
 interface MonsterFormProps {
   onSuccess?: () => void
@@ -25,6 +26,7 @@ export function MonsterForm({ onSuccess, monsterToEdit }: MonsterFormProps) {
   })
 
   const { addMonster, updateMonster } = useMonsterStore()
+  const { t } = useTranslation()
 
   useEffect(() => {
     if (monsterToEdit) {
@@ -64,19 +66,19 @@ export function MonsterForm({ onSuccess, monsterToEdit }: MonsterFormProps) {
     setIsLoading(true)
 
     if (!formData.name.trim()) {
-      toast.error("Nome do monstro é obrigatório!")
+      toast.error(t("monsterForm.nameRequired"))
       setIsLoading(false)
       return
     }
 
     if (formData.attack < 1 || formData.defense < 1 || formData.speed < 1 || formData.hp < 1) {
-      toast.error("Todos os atributos devem ser maiores que 0!")
+      toast.error(t("monsterForm.attributesRequired"))
       setIsLoading(false)
       return
     }
 
     if (!(await isValidImageUrl(formData.imageUrl))) {
-      toast.error("A URL da imagem é inválida ou não pode ser carregada.")
+      toast.error(t("monsterForm.invalidImageUrl"))
       setIsLoading(false)
       return
     }
@@ -88,10 +90,10 @@ export function MonsterForm({ onSuccess, monsterToEdit }: MonsterFormProps) {
         maxHp: monsterToEdit.maxHp, // Keep original maxHp
         hp: Math.min(formData.hp, monsterToEdit.maxHp), // Cap current HP at maxHp
       })
-      toast.success(`${formData.name} foi atualizado com sucesso!`)
+      toast.success(t("monsterForm.updated", { name: formData.name }))
     } else {
       addMonster(formData)
-      toast.success(`${formData.name} foi criado com sucesso!`)
+      toast.success(t("monsterForm.created", { name: formData.name }))
     }
 
     setFormData({
@@ -109,18 +111,18 @@ export function MonsterForm({ onSuccess, monsterToEdit }: MonsterFormProps) {
 
   const generateRandomMonster = () => {
     const names = [
-      "Dragão Flamejante",
-      "Lobo Sombrio",
-      "Golem de Pedra",
-      "Fênix Dourada",
-      "Kraken Abissal",
-      "Tigre Glacial",
-      "Serpente Venenosa",
-      "Águia Tempestuosa",
-      "Urso Berserker",
-      "Escorpião Elétrico",
-      "Pantera Noturna",
-      "Rinoceronte Blindado",
+      t("monsterForm.randomNames.dragon"),
+      t("monsterForm.randomNames.wolf"),
+      t("monsterForm.randomNames.golem"),
+      t("monsterForm.randomNames.phoenix"),
+      t("monsterForm.randomNames.kraken"),
+      t("monsterForm.randomNames.tiger"),
+      t("monsterForm.randomNames.snake"),
+      t("monsterForm.randomNames.eagle"),
+      t("monsterForm.randomNames.bear"),
+      t("monsterForm.randomNames.scorpion"),
+      t("monsterForm.randomNames.panther"),
+      t("monsterForm.randomNames.rhino"),
     ]
 
     const randomName = names[Math.floor(Math.random() * names.length)]
@@ -143,17 +145,17 @@ export function MonsterForm({ onSuccess, monsterToEdit }: MonsterFormProps) {
           {monsterToEdit ? (
             <>
               <Pencil className="w-6 h-6" />
-              Editar Monstro: {monsterToEdit.name}
+              {t("monsterForm.editTitle", { name: monsterToEdit.name })}
             </>
           ) : (
             <>
               <Plus className="w-6 h-6" />
-              Criar Novo Monstro
+              {t("monsterForm.createTitle")}
             </>
           )}
         </CardTitle>
         <CardDescription className="text-gray-300">
-          {monsterToEdit ? "Ajuste os atributos do seu monstro." : "Defina os atributos do seu monstro e prepare-o para a batalha!"}
+          {monsterToEdit ? t("monsterForm.editDesc") : t("monsterForm.createDesc")}
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -162,22 +164,22 @@ export function MonsterForm({ onSuccess, monsterToEdit }: MonsterFormProps) {
             {/* Monster naming and image block */}
             <div className="space-y-4 animate-in fade-in-0 slide-in-from-bottom-5 duration-500" style={{ animationDelay: `0ms`, animationFillMode: "backwards" }}>
               <div>
-                <Label htmlFor="name" className="text-white">Nome do Monstro</Label>
+                <Label htmlFor="name" className="text-white">{t("monsterForm.nameLabel")}</Label>
                 <Input
                   id="name"
                   value={formData.name}
                   onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))}
-                  placeholder="Ex: Dragão Flamejante"
+                  placeholder={t("monsterForm.namePlaceholder")}
                   className="w-full bg-white/10 border-white/20 text-white placeholder:text-gray-400"
                 />
               </div>
               <div>
-                <Label htmlFor="imageUrl" className="text-white">URL da Imagem (opcional)</Label>
+                <Label htmlFor="imageUrl" className="text-white">{t("monsterForm.imageLabel")}</Label>
                 <Input
                   id="imageUrl"
                   value={formData.imageUrl}
                   onChange={(e) => setFormData((prev) => ({ ...prev, imageUrl: e.target.value }))}
-                  placeholder="https://exemplo.com/imagem.jpg"
+                  placeholder={t("monsterForm.imagePlaceholder")}
                   className="w-full bg-white/10 border-white/20 text-white placeholder:text-gray-400"
                 />
               </div>
@@ -187,7 +189,7 @@ export function MonsterForm({ onSuccess, monsterToEdit }: MonsterFormProps) {
             <div className="space-y-4 animate-in fade-in-0 slide-in-from-bottom-5 duration-500" style={{ animationDelay: `150ms`, animationFillMode: "backwards" }}>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="attack" className="text-white">Ataque</Label>
+                  <Label htmlFor="attack" className="text-white">{t("monsterForm.attack")}</Label>
                   <Input
                     id="attack"
                     type="number"
@@ -199,7 +201,7 @@ export function MonsterForm({ onSuccess, monsterToEdit }: MonsterFormProps) {
                   />
                 </div>
                 <div>
-                  <Label htmlFor="defense" className="text-white">Defesa</Label>
+                  <Label htmlFor="defense" className="text-white">{t("monsterForm.defense")}</Label>
                   <Input
                     id="defense"
                     type="number"
@@ -213,7 +215,7 @@ export function MonsterForm({ onSuccess, monsterToEdit }: MonsterFormProps) {
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="speed" className="text-white">Velocidade</Label>
+                  <Label htmlFor="speed" className="text-white">{t("monsterForm.speed")}</Label>
                   <Input
                     id="speed"
                     type="number"
@@ -225,7 +227,7 @@ export function MonsterForm({ onSuccess, monsterToEdit }: MonsterFormProps) {
                   />
                 </div>
                 <div>
-                  <Label htmlFor="hp" className="text-white">HP</Label>
+                  <Label htmlFor="hp" className="text-white">{t("monsterForm.hp")}</Label>
                   <Input
                     id="hp"
                     type="number"
@@ -250,7 +252,7 @@ export function MonsterForm({ onSuccess, monsterToEdit }: MonsterFormProps) {
               className="flex-1 bg-white/10 border-white/20 text-white hover:bg-white/20 disabled:opacity-50"
             >
               <Sparkles className="w-4 h-4 mr-2" />
-              Gerar Aleatório
+              {t("monsterForm.generateRandom")}
             </Button>
             <Button
               type="submit"
@@ -266,7 +268,7 @@ export function MonsterForm({ onSuccess, monsterToEdit }: MonsterFormProps) {
                   <Plus className="w-4 h-4 mr-2" />
                 )
               )}
-              {isLoading ? (monsterToEdit ? "Atualizando..." : "Criando...") : (monsterToEdit ? "Salvar Alterações" : "Criar Monstro")}
+              {isLoading ? (monsterToEdit ? t("monsterForm.updating") : t("monsterForm.creating")) : (monsterToEdit ? t("monsterForm.saveChanges") : t("monsterForm.createMonster"))}
             </Button>
           </div>
         </form>

@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import type { Monster } from "@/models/Monster"
+import { useTranslation } from "react-i18next"
 
 type SortKey = keyof Omit<Monster, "id" | "imageUrl">
 type SortConfig = {
@@ -21,6 +22,7 @@ export function MonsterList() {
   const [searchTerm, setSearchTerm] = useState("")
   const [sortConfig, setSortConfig] = useState<SortConfig>({ key: "name", order: "asc" })
   const MONSTERS_PER_PAGE = 8
+  const { t } = useTranslation()
 
   if (monsters.length === 0) {
     return (
@@ -31,10 +33,10 @@ export function MonsterList() {
         >
           <CardTitle className="text-2xl text-white flex items-center justify-center gap-2">
             <Users className="w-6 h-6" />
-            Nenhum Monstro Criado
+            {t("monsterList.noneCreated")}
           </CardTitle>
           <CardDescription className="text-gray-300">
-            Crie seu primeiro monstro para começar as batalhas épicas!
+            {t("monsterList.createFirstDesc")}
           </CardDescription>
         </CardHeader>
 
@@ -43,7 +45,7 @@ export function MonsterList() {
             to="/create"
             className="group inline-block animate-in fade-in-0 slide-in-from-bottom-5 duration-500"
             style={{ animationDelay: "200ms", animationFillMode: "backwards" }}
-            aria-label="Criar novo monstro"
+            aria-label={t("monsterList.createNew")}
           >
             <div className="w-32 h-32 mx-auto mb-4 rounded-full bg-white/10 flex items-center justify-center transition-all duration-300 group-hover:bg-white/20 group-hover:scale-110 cursor-pointer">
               <Plus className="w-16 h-16 text-gray-400 transition-colors group-hover:text-white" />
@@ -53,7 +55,7 @@ export function MonsterList() {
             className="text-gray-400 mb-4 animate-in fade-in-0 slide-in-from-bottom-5 duration-500"
             style={{ animationDelay: "300ms", animationFillMode: "backwards" }}
           >
-            Clique no botão para criar seu primeiro guerreiro!
+            {t("monsterList.clickToCreate")}
           </p>
         </CardContent>
       </Card>
@@ -104,11 +106,11 @@ export function MonsterList() {
       <div className="text-center space-y-2">
         <h1 className="text-4xl md:text-5xl font-bold text-white flex items-center justify-center gap-4">
           <Users className="w-10 h-10 text-blue-400" />
-          Coleção de Monstros
+          {t("monsterList.title")}
           <Users className="w-10 h-10 text-blue-400" />
         </h1>
         <p className="text-lg text-gray-300">
-          Gerencie, busque e ordene seus guerreiros.
+          {t("monsterList.subtitle")}
         </p>
       </div>
 
@@ -117,7 +119,7 @@ export function MonsterList() {
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
           <Input
             type="text"
-            placeholder="Buscar monstro por nome..."
+            placeholder={t("monsterList.searchPlaceholder")}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="w-full pl-10 bg-white/10 border-white/20 text-white placeholder:text-gray-400"
@@ -129,14 +131,14 @@ export function MonsterList() {
             onValueChange={(value: SortKey) => setSortConfig({ ...sortConfig, key: value })}
           >
             <SelectTrigger className="w-full md:w-[180px] bg-white/10 border-white/20 text-white">
-              <SelectValue placeholder="Ordenar por" />
+              <SelectValue placeholder={t("monsterList.sortBy")} />
             </SelectTrigger>
             <SelectContent className="bg-gray-800 border-white/20 text-white">
-              <SelectItem value="name">Nome</SelectItem>
-              <SelectItem value="attack">Ataque</SelectItem>
-              <SelectItem value="defense">Defesa</SelectItem>
-              <SelectItem value="speed">Velocidade</SelectItem>
-              <SelectItem value="hp">HP</SelectItem>
+              <SelectItem value="name">{t("monsterList.sort.name")}</SelectItem>
+              <SelectItem value="attack">{t("monsterList.sort.attack")}</SelectItem>
+              <SelectItem value="defense">{t("monsterList.sort.defense")}</SelectItem>
+              <SelectItem value="speed">{t("monsterList.sort.speed")}</SelectItem>
+              <SelectItem value="hp">{t("monsterList.sort.hp")}</SelectItem>
             </SelectContent>
           </Select>
           <Button
@@ -173,7 +175,7 @@ export function MonsterList() {
         </div>
       ) : (
         <div className="text-center text-gray-300 py-8">
-          <p>Nenhum monstro encontrado com o nome "{searchTerm}".</p>
+          <p>{t("monsterList.notFound", { searchTerm })}</p>
         </div>
       )}
 
@@ -185,10 +187,10 @@ export function MonsterList() {
             variant="outline"
             className="bg-white/10 border-white/20 text-white hover:bg-white/20"
           >
-            Anterior
+            {t("monsterList.prev")}
           </Button>
           <span className="text-white font-medium">
-            Página {currentPage} de {totalPages}
+            {t("monsterList.page", { currentPage, totalPages })}
           </span>
           <Button
             onClick={handleNextPage}
@@ -196,7 +198,7 @@ export function MonsterList() {
             variant="outline"
             className="bg-white/10 border-white/20 text-white hover:bg-white/20"
           >
-            Próxima
+            {t("monsterList.next")}
           </Button>
         </div>
       )}

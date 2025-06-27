@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge"
 import { Trash2, RotateCcw, Heart, Sword, Shield, Zap, Pencil } from "lucide-react"
 import { toast } from "sonner"
 import { Link } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 
 interface MonsterCardProps {
   monster: Monster
@@ -15,15 +16,16 @@ interface MonsterCardProps {
 
 export function MonsterCard({ monster, showActions = false }: MonsterCardProps) {
   const { removeMonster, resetMonsterHp } = useMonsterStore()
+  const { t } = useTranslation()
 
   const handleDelete = () => {
     removeMonster(monster.id)
-    toast.success(`${monster.name} foi removido!`)
+    toast.success(t("monsterCard.removed", { name: monster.name }))
   }
 
   const handleResetHp = () => {
     resetMonsterHp(monster.id)
-    toast.success(`HP de ${monster.name} foi restaurado!`)
+    toast.success(t("monsterCard.hpRestored", { name: monster.name }))
   }
 
   const hpPercentage = (monster.hp / monster.maxHp) * 100
@@ -43,7 +45,7 @@ export function MonsterCard({ monster, showActions = false }: MonsterCardProps) 
           <CardTitle className="text-white text-lg">{monster.name}</CardTitle>
           {isDead && (
             <Badge variant="destructive" className="bg-red-600">
-              Derrotado
+              {t("monsterCard.defeated")}
             </Badge>
           )}
         </div>
@@ -70,7 +72,7 @@ export function MonsterCard({ monster, showActions = false }: MonsterCardProps) 
           <div className="flex items-center justify-between text-sm">
             <span className="text-white flex items-center gap-1">
               <Heart className="w-4 h-4 text-red-400" />
-              HP
+              {t("monsterCard.hp")}
             </span>
             <span className={`font-bold ${isInjured ? "text-red-400" : "text-green-400"}`}>
               {monster.hp}/{monster.maxHp}
@@ -86,7 +88,7 @@ export function MonsterCard({ monster, showActions = false }: MonsterCardProps) 
               <Sword className="w-3 h-3" />
             </div>
             <div className="text-white font-bold">{monster.attack}</div>
-            <div className="text-gray-400 text-xs">ATK</div>
+            <div className="text-gray-400 text-xs">{t("monsterCard.atk")}</div>
           </div>
 
           <div className="bg-white/10 rounded-lg p-2 text-center">
@@ -94,7 +96,7 @@ export function MonsterCard({ monster, showActions = false }: MonsterCardProps) 
               <Shield className="w-3 h-3" />
             </div>
             <div className="text-white font-bold">{monster.defense}</div>
-            <div className="text-gray-400 text-xs">DEF</div>
+            <div className="text-gray-400 text-xs">{t("monsterCard.def")}</div>
           </div>
 
           <div className="bg-white/10 rounded-lg p-2 text-center">
@@ -102,7 +104,7 @@ export function MonsterCard({ monster, showActions = false }: MonsterCardProps) 
               <Zap className="w-3 h-3" />
             </div>
             <div className="text-white font-bold">{monster.speed}</div>
-            <div className="text-gray-400 text-xs">SPD</div>
+            <div className="text-gray-400 text-xs">{t("monsterCard.spd")}</div>
           </div>
         </div>
 
@@ -117,7 +119,7 @@ export function MonsterCard({ monster, showActions = false }: MonsterCardProps) 
                 className="flex-1 bg-green-600/20 border-green-600/50 text-green-400 hover:bg-green-600/30"
               >
                 <RotateCcw className="w-3 h-3 mr-1" />
-                Curar
+                {t("monsterCard.heal")}
               </Button>
             )}
             <Button
@@ -127,7 +129,7 @@ export function MonsterCard({ monster, showActions = false }: MonsterCardProps) 
               className="flex-1 bg-red-600/20 border-red-600/50 text-red-400 hover:bg-red-600/30"
             >
               <Trash2 className="w-3 h-3 mr-1" />
-              Excluir
+              {t("monsterCard.delete")}
             </Button>
             <Button
               asChild
@@ -137,7 +139,7 @@ export function MonsterCard({ monster, showActions = false }: MonsterCardProps) 
             >
             <Link to={`/edit/${monster.id}`}>
               <Pencil className="w-3 h-3 mr-1" />
-              Editar
+              {t("monsterCard.edit")}
             </Link>
             </Button>
           </div>

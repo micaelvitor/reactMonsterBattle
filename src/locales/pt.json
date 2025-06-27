@@ -1,0 +1,158 @@
+{
+  "nav": {
+    "home": "Início",
+    "monsters": "Monstros",
+    "create": "Criar",
+    "battle": "Batalha"
+  },
+  "notFound": {
+    "title": "Erro 404",
+    "description": "Oops! A página que você está procurando não foi encontrada.",
+    "back": "Voltar para o Início",
+    "lost": "Parece que você se perdeu na arena. Vamos levá-lo de volta para um lugar seguro."
+  },
+  "footer": {
+    "madeWith": "Desenvolvido com ❤️ para o desafio técnico da Revi",
+    "stack": "React + TypeScript + Vite + Zustand + Tailwind CSS"
+  },
+  "battle": {
+    "winner": "{{name}} venceu a batalha!",
+    "error": "Erro durante a batalha!"
+  },
+  "home": {
+    "heroDesc": "Crie monstros épicos e deixe-os batalhar pela supremacia!",
+    "challenge": "Desafio Técnico Revi",
+    "createMonsters": "Criar Monstros",
+    "createMonstersDesc": "Crie monstros únicos com atributos personalizados",
+    "manageMonsters": "Gerenciar Monstros",
+    "manageMonstersDesc": "Visualize e gerencie sua coleção de monstros",
+    "battleArena": "Arena de Batalha",
+    "battleArenaDesc": "Deixe seus monstros lutarem pela supremacia",
+    "needTwoMonsters": "Precisa de 2+ monstros",
+    "access": "Acessar",
+    "startJourney": "Comece sua jornada!",
+    "createFirstDesc": "Crie seu primeiro monstro para começar as batalhas épicas",
+    "createFirst": "Criar Primeiro Monstro",
+    "howBattleWorks": "Como Funciona o Sistema de Batalha",
+    "attackOrder": "Ordem de Ataque",
+    "attackOrderDesc": "Monstro com maior velocidade ataca primeiro. Em caso de empate, maior ataque decide.",
+    "damageCalc": "Cálculo de Dano",
+    "damageCalcDesc": "Dano = Ataque - Defesa (mínimo 1 de dano sempre)",
+    "victoryCond": "Condição de Vitória",
+    "victoryCondDesc": "Primeiro monstro a reduzir o HP do oponente a zero vence",
+    "roundsAlt": "Rounds Alternados",
+    "roundsAltDesc": "Monstros atacam alternadamente até haver um vencedor",
+    "stats": {
+      "monsters": "Monstros",
+      "avgAtk": "ATK Médio",
+      "avgDef": "DEF Médio",
+      "battles": "Batalhas"
+    }
+  },
+  "monsterList": {
+    "noneCreated": "Nenhum Monstro Criado",
+    "createFirstDesc": "Crie seu primeiro monstro para começar as batalhas épicas!",
+    "createNew": "Criar novo monstro",
+    "clickToCreate": "Clique no botão para criar seu primeiro guerreiro!",
+    "title": "Coleção de Monstros",
+    "subtitle": "Gerencie, busque e ordene seus guerreiros.",
+    "searchPlaceholder": "Buscar monstro por nome...",
+    "sortBy": "Ordenar por",
+    "sort": {
+      "name": "Nome",
+      "attack": "Ataque",
+      "defense": "Defesa",
+      "speed": "Velocidade",
+      "hp": "HP"
+    },
+    "notFound": "Nenhum monstro encontrado com o nome \"{{searchTerm}}\".",
+    "prev": "Anterior",
+    "next": "Próxima",
+    "page": "Página {{currentPage}} de {{totalPages}}"
+  },
+  "monsterForm": {
+    "nameRequired": "Nome do monstro é obrigatório!",
+    "attributesRequired": "Todos os atributos devem ser maiores que 0!",
+    "invalidImageUrl": "A URL da imagem é inválida ou não pode ser carregada.",
+    "updated": "{{name}} foi atualizado com sucesso!",
+    "created": "{{name}} foi criado com sucesso!",
+    "editTitle": "Editar Monstro: {{name}}",
+    "createTitle": "Criar Novo Monstro",
+    "editDesc": "Ajuste os atributos do seu monstro.",
+    "createDesc": "Defina os atributos do seu monstro e prepare-o para a batalha!",
+    "nameLabel": "Nome do Monstro",
+    "namePlaceholder": "Ex: Dragão Flamejante",
+    "imageLabel": "URL da Imagem (opcional)",
+    "imagePlaceholder": "https://exemplo.com/imagem.jpg",
+    "attack": "Ataque",
+    "defense": "Defesa",
+    "speed": "Velocidade",
+    "hp": "HP",
+    "generateRandom": "Gerar Aleatório",
+    "updating": "Atualizando...",
+    "creating": "Criando...",
+    "saveChanges": "Salvar Alterações",
+    "createMonster": "Criar Monstro",
+    "randomNames": {
+      "dragon": "Dragão Flamejante",
+      "wolf": "Lobo Sombrio",
+      "golem": "Golem de Pedra",
+      "phoenix": "Fênix Dourada",
+      "kraken": "Kraken Abissal",
+      "tiger": "Tigre Glacial",
+      "snake": "Serpente Venenosa",
+      "eagle": "Águia Tempestuosa",
+      "bear": "Urso Berserker",
+      "scorpion": "Escorpião Elétrico",
+      "panther": "Pantera Noturna",
+      "rhino": "Rinoceronte Blindado"
+    }
+  },
+  "battlePage": {
+    "insufficientMonsters": "Monstros Insuficientes",
+    "needTwoMonsters": "Você precisa de pelo menos 2 monstros para iniciar uma batalha",
+    "currentMonsters": "Monstros atuais",
+    "requiredMonsters": "Monstros necessários",
+    "createMonster": "Criar Monstro",
+    "viewMonsters": "Ver Monstros"
+  },
+  "battleArena": {
+    "title": "Arena de Batalha",
+    "subtitle": "Selecione dois monstros e deixe-os lutar pela supremacia!",
+    "chooseCombatants": "Escolha os Combatentes",
+    "selectTwoMonsters": "Selecione dois monstros diferentes para a batalha",
+    "monster1": "Monstro 1",
+    "monster2": "Monstro 2",
+    "selectFirstMonster": "Selecione o primeiro monstro",
+    "selectSecondMonster": "Selecione o segundo monstro",
+    "battleInProgress": "Batalha em Andamento...",
+    "startBattle": "Iniciar Batalha!",
+    "newBattle": "Nova Batalha"
+  },
+  "monsterCard": {
+    "removed": "{{name}} foi removido!",
+    "hpRestored": "HP de {{name}} foi restaurado!",
+    "defeated": "Derrotado",
+    "hp": "HP",
+    "atk": "ATK",
+    "def": "DEF",
+    "spd": "SPD",
+    "heal": "Curar",
+    "delete": "Excluir",
+    "edit": "Editar"
+  },
+  "battleResult": {
+    "winner": "{{name}} Venceu!",
+    "epicBattle": "Batalha épica com {{rounds}} {{roundText}}",
+    "round": "round",
+    "rounds": "rounds",
+    "winnerTitle": "Vencedor",
+    "loser": "Derrotado",
+    "battleLog": "Log da Batalha",
+    "followRounds": "Acompanhe cada round da batalha épica",
+    "damage": "Dano"
+  },
+  "battleLogic": {
+    "attackDescription": "{{attacker}} ataca {{defender}} causando {{damage}} de dano!"
+  }
+} 

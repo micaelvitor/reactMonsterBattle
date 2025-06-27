@@ -3,6 +3,9 @@ import { Link, useLocation } from "react-router-dom"
 import { Sword, Home, Users, Plus, Github, Trophy } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useMonsterStore } from "@/store/useMonsterStore"
+import { useTranslation } from "react-i18next"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { useRef } from "react"
 
 interface LayoutProps {
   children: ReactNode
@@ -11,29 +14,31 @@ interface LayoutProps {
 export function Layout({ children }: LayoutProps) {
   const location = useLocation()
   const { monsters } = useMonsterStore()
+  const { t, i18n } = useTranslation()
+  const selectRef = useRef<HTMLButtonElement>(null)
 
   const navigation = [
     {
-      name: "Início",
+      name: t("nav.home"),
       href: "/",
       icon: Home,
       current: location.pathname === "/",
     },
     {
-      name: "Monstros",
+      name: t("nav.monsters"),
       href: "/monsters",
       icon: Users,
       current: location.pathname === "/monsters",
       badge: monsters.length,
     },
     {
-      name: "Criar",
+      name: t("nav.create"),
       href: "/create",
       icon: Plus,
       current: location.pathname === "/create",
     },
     {
-      name: "Batalha",
+      name: t("nav.battle"),
       href: "/battle",
       icon: Trophy,
       current: location.pathname === "/battle",
@@ -55,14 +60,33 @@ export function Layout({ children }: LayoutProps) {
               </div>
             </Link>
 
-            <a
-              href="https://github.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white hover:text-yellow-400 transition-colors"
-            >
-              <Github className="w-6 h-6" />
-            </a>
+            <div className="flex items-center gap-4">
+              <a
+                href="https://github.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:text-yellow-400 transition-colors"
+              >
+                <Github className="w-6 h-6" />
+              </a>
+              <Select
+                value={i18n.resolvedLanguage}
+                onValueChange={(value) => {
+                  i18n.changeLanguage(value)
+                  setTimeout(() => {
+                    selectRef.current?.blur()
+                  }, 0)
+                }}
+              >
+                <SelectTrigger ref={selectRef} className="w-[140px] bg-black/30 border-white/20 text-white focus:ring-0 focus:outline-none">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent className="bg-gray-800 border-white/20 text-white">
+                  <SelectItem value="pt">Português</SelectItem>
+                  <SelectItem value="en">English</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
         </div>
       </header>
@@ -106,9 +130,9 @@ export function Layout({ children }: LayoutProps) {
         <div className="container mx-auto px-4 py-6">
           <div className="text-center text-gray-300">
             <p className="mb-2">
-              Desenvolvido com ❤️ para o desafio técnico da <span className="text-yellow-400 font-bold">Revi</span>
+              {t("footer.madeWith")} <span className="text-yellow-400 font-bold">Revi</span>
             </p>
-            <p className="text-sm">React + TypeScript + Vite + Zustand + Tailwind CSS</p>
+            <p className="text-sm">{t("footer.stack")}</p>
           </div>
         </div>
       </footer>
