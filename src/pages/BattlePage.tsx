@@ -5,10 +5,12 @@ import { BattleArena } from "@/features/battle/BattleArena"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card"
 import { Button } from "@/components/ui/button"
 import { AlertTriangle, Plus } from "lucide-react"
+import { useTranslation } from "react-i18next"
 
 export function BattlePage() {
   const navigate = useNavigate()
   const { monsters } = useMonsterStore()
+  const { t } = useTranslation()
 
   useEffect(() => {
     if (monsters.length < 2){}
@@ -21,10 +23,10 @@ export function BattlePage() {
             <CardHeader className="text-center animate-in fade-in-0 slide-in-from-bottom-5 duration-500" style={{ animationDelay: "100ms", animationFillMode: "backwards" }}>
             <CardTitle className="text-2xl text-white flex items-center justify-center gap-2">
               <AlertTriangle className="w-6 h-6 text-yellow-400" />
-              Monstros Insuficientes
+              {t("battlePage.insufficientMonsters")}
             </CardTitle>
             <CardDescription className="text-gray-300">
-              Você precisa de pelo menos 2 monstros para iniciar uma batalha
+              {t("battlePage.needTwoMonsters")}
             </CardDescription>
             </CardHeader>
 
@@ -34,10 +36,10 @@ export function BattlePage() {
               style={{ animationDelay: "200ms", animationFillMode: "backwards" }}
             >
               <p>
-                Monstros atuais: <span className="text-white font-bold">{monsters.length}</span>
+                {t("battlePage.currentMonsters")}: <span className="text-white font-bold">{monsters.length}</span>
               </p>
               <p>
-                Monstros necessários: <span className="text-white font-bold">2</span>
+                {t("battlePage.requiredMonsters")}: <span className="text-white font-bold">2</span>
               </p>
             </div>
 
@@ -47,11 +49,11 @@ export function BattlePage() {
             >
               <Button onClick={() => navigate("/create")} className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700">
                 <Plus className="w-4 h-4 mr-2" />
-                  Criar Monstro
+                  {t("battlePage.createMonster")}
                 </Button>
                 { monsters.length > 0 && 
                   <Button onClick={() => navigate("/monsters")} variant="outline" className="bg-white/10 border-white/20 text-white hover:bg-white/20">
-                    Ver Monstros
+                    {t("battlePage.viewMonsters")}
                   </Button>
                 }
             </div>

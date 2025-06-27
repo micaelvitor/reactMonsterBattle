@@ -4,9 +4,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../co
 import { Button } from "../components/ui/button"
 import { Badge } from "../components/ui/badge"
 import { Sword, Users, Plus, Trophy, Zap, Shield, Heart, Star } from "lucide-react"
+import { useTranslation } from "react-i18next"
 
 export function HomePage() {
   const { monsters, totalBattles } = useMonsterStore()
+  const { t } = useTranslation()
 
   const stats = {
     totalMonsters: monsters.length,
@@ -20,23 +22,23 @@ export function HomePage() {
   const features = [
     {
       icon: Plus,
-      title: "Criar Monstros",
-      description: "Crie monstros únicos com atributos personalizados",
+      title: t("home.createMonsters"),
+      description: t("home.createMonstersDesc"),
       href: "/create",
       color: "from-green-600 to-emerald-600",
     },
     {
       icon: Users,
-      title: "Gerenciar Monstros",
-      description: "Visualize e gerencie sua coleção de monstros",
+      title: t("home.manageMonsters"),
+      description: t("home.manageMonstersDesc"),
       href: "/monsters",
       color: "from-blue-600 to-cyan-600",
       badge: monsters.length,
     },
     {
       icon: Trophy,
-      title: "Arena de Batalha",
-      description: "Deixe seus monstros lutarem pela supremacia",
+      title: t("home.battleArena"),
+      description: t("home.battleArenaDesc"),
       href: "/battle",
       color: "from-red-600 to-orange-600",
       disabled: monsters.length < 2,
@@ -52,7 +54,7 @@ export function HomePage() {
           <div>
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-2">Monster Battle Arena</h1>
             <p className="text-xl md:text-2xl text-gray-300">
-              Crie monstros épicos e deixe-os batalhar pela supremacia!
+              {t("home.heroDesc")}
             </p>
           </div>
           <Sword className="w-16 h-16 text-yellow-400" />
@@ -61,7 +63,7 @@ export function HomePage() {
         <div className="flex flex-wrap justify-center gap-4">
           <Badge variant="outline" className="bg-white/10 border-white/20 text-white px-4 py-2 text-lg">
             <Star className="w-4 h-4 mr-2" />
-            Desafio Técnico Revi
+            {t("home.challenge")}
           </Badge>
           <Badge variant="outline" className="bg-white/10 border-white/20 text-white px-4 py-2 text-lg">
             React + TypeScript
@@ -75,22 +77,22 @@ export function HomePage() {
           {
             icon: <Users className="w-8 h-8 text-blue-400 mx-auto mb-2" />,
             value: stats.totalMonsters,
-            label: "Monstros",
+            label: t("home.stats.monsters"),
           },
           {
             icon: <Zap className="w-8 h-8 text-red-400 mx-auto mb-2" />,
             value: stats.averageAttack,
-            label: "ATK Médio",
+            label: t("home.stats.avgAtk"),
           },
           {
             icon: <Shield className="w-8 h-8 text-blue-400 mx-auto mb-2" />,
             value: stats.averageDefense,
-            label: "DEF Médio",
+            label: t("home.stats.avgDef"),
           },
           {
             icon: <Trophy className="w-8 h-8 text-yellow-400 mx-auto mb-2" />,
             value: stats.totalBattles,
-            label: "Batalhas",
+            label: t("home.stats.battles"),
           },
         ].map((stat, index) => (
           <div
@@ -146,10 +148,10 @@ export function HomePage() {
                   >
                     {feature.disabled ? (
                       <Link to={'/create'}>
-                        Precisa de 2+ monstros
+                        {t("home.needTwoMonsters")}
                       </Link>
                     ) : (
-                      <Link to={feature.href}>Acessar</Link>
+                      <Link to={feature.href}>{t("home.access")}</Link>
                     )}
                   </Button>
                 </CardContent>
@@ -164,9 +166,9 @@ export function HomePage() {
       {monsters.length === 0 && (
         <Card className="bg-gradient-to-r from-#3a1b3a-600/20 to-blue-600/20 backdrop-blur-sm border-purple-400/30">
           <CardHeader className="text-center">
-            <CardTitle className="text-2xl text-white">🚀 Comece sua jornada!</CardTitle>
+            <CardTitle className="text-2xl text-white">🚀 {t("home.startJourney")}</CardTitle>
             <CardDescription className="text-gray-300 text-lg">
-              Crie seu primeiro monstro para começar as batalhas épicas
+              {t("home.createFirstDesc")}
             </CardDescription>
           </CardHeader>
           <CardContent className="text-center">
@@ -177,7 +179,7 @@ export function HomePage() {
             >
               <Link to="/create">
                 <Plus className="w-5 h-5 mr-2" />
-                Criar Primeiro Monstro
+                {t("home.createFirst")}
               </Link>
             </Button>
           </CardContent>
@@ -189,28 +191,28 @@ export function HomePage() {
         <CardHeader>
           <CardTitle className="text-white flex items-center gap-2">
             <Heart className="w-5 h-5 text-red-400" />
-            Como Funciona o Sistema de Batalha
+            {t("home.howBattleWorks")}
           </CardTitle>
         </CardHeader>
         <CardContent className="text-gray-300 space-y-3">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <h4 className="text-white font-semibold mb-2">📊 Ordem de Ataque</h4>
+              <h4 className="text-white font-semibold mb-2">📊 {t("home.attackOrder")}</h4>
               <p className="text-sm">
-                Monstro com maior velocidade ataca primeiro. Em caso de empate, maior ataque decide.
+                {t("home.attackOrderDesc")}
               </p>
             </div>
             <div>
-              <h4 className="text-white font-semibold mb-2">⚔️ Cálculo de Dano</h4>
-              <p className="text-sm">Dano = Ataque - Defesa (mínimo 1 de dano sempre)</p>
+              <h4 className="text-white font-semibold mb-2">⚔️ {t("home.damageCalc")}</h4>
+              <p className="text-sm">{t("home.damageCalcDesc")}</p>
             </div>
             <div>
-              <h4 className="text-white font-semibold mb-2">🏆 Condição de Vitória</h4>
-              <p className="text-sm">Primeiro monstro a reduzir o HP do oponente a zero vence</p>
+              <h4 className="text-white font-semibold mb-2">🏆 {t("home.victoryCond")}</h4>
+              <p className="text-sm">{t("home.victoryCondDesc")}</p>
             </div>
             <div>
-              <h4 className="text-white font-semibold mb-2">🔄 Rounds Alternados</h4>
-              <p className="text-sm">Monstros atacam alternadamente até haver um vencedor</p>
+              <h4 className="text-white font-semibold mb-2">🔄 {t("home.roundsAlt")}</h4>
+              <p className="text-sm">{t("home.roundsAltDesc")}</p>
             </div>
           </div>
         </CardContent>

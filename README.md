@@ -1,158 +1,163 @@
 # Monster Battle Arena 🐉⚔️
 
-Uma aplicação de batalha de monstros desenvolvida em **React puro** para o desafio técnico da **Revi**. Crie monstros épicos, defina seus atributos e deixe-os lutar pela supremacia!
+A monster battle application built in **Vanilla React** for the **Revi** technical challenge. Create epic monsters, set their attributes, and let them fight for supremacy!
 
-## 🎯 Funcionalidades
+## 🎯 Features
 
-- ✅ **Cadastro de Monstros**: Crie monstros com nome, ataque, defesa, velocidade, HP e imagem
-- ✅ **Sistema de Batalha**: Batalhas automáticas entre dois monstros seguindo algoritmo específico
-- ✅ **Visualização de Resultados**: Acompanhe cada round da batalha com log detalhado
-- ✅ **Interface Intuitiva**: Design responsivo e moderno com tema espacial
-- ✅ **Persistência de Dados**: Monstros salvos no localStorage do navegador
-- ✅ **Geração Aleatória**: Crie monstros aleatórios com um clique
+- ✅ **Monster Creation**: Create monsters with name, attack, defense, speed, HP, and image
+- ✅ **Battle System**: Automatic battles between two monsters following a specific algorithm
+- ✅ **Battle Log**: View each round of the battle with detailed logs
+- ✅ **Intuitive Interface**: Responsive and modern design with a space-themed UI
+- ✅ **Data Persistence**: Monsters are saved in the browser’s localStorage
+- ✅ **Random Generation**: Instantly create random monsters with one click
 
-## 🤖 Algoritmo de Batalha
+## 🤖 Battle Algorithm
 
-O sistema de batalha segue as regras especificadas:
+The battle system follows these rules:
 
-1. **Ordem de Ataque**: Monstro com maior velocidade ataca primeiro
-   - Em caso de empate na velocidade, quem tem maior ataque vai primeiro
-2. **Cálculo de Dano**: `dano = ataque - defesa` (mínimo 1)
-3. **Aplicação de Dano**: `hp = hp - dano`
-4. **Condição de Vitória**: Primeiro monstro a reduzir o HP do oponente a zero vence
-5. **Rounds Alternados**: Monstros atacam alternadamente até haver um vencedor
+1. **Attack Order**: The monster with the highest speed attacks first  
+   - If speeds are tied, the one with the highest attack goes first  
+2. **Damage Calculation**: `damage = attack - defense` (minimum of 1)  
+3. **Damage Application**: `hp = hp - damage`  
+4. **Victory Condition**: First monster to reduce opponent’s HP to zero wins  
+5. **Alternating Rounds**: Monsters take turns attacking until a winner is declared  
 
-## 🚀 Tecnologias Utilizadas
+## 🚀 Technologies Used
 
-- **React 18** com **TypeScript**
-- **Vite** como bundler
-- **Zustand** para gerenciamento de estado
-- **Tailwind CSS** para estilização
-- **Radix UI** para componentes base
-- **Lucide React** para ícones
-- **Sonner** para notificações
+- **React 18** with **TypeScript**
+- **Vite** as the bundler
+- **Zustand** for state management
+- **Tailwind CSS** for styling
+- **Tailwind CSS Animate** for animations
+- **Radix UI** for base UI components
+- **Lucide React** for icons
+- **Sonner** for toast notifications
+- **i18next** for internationalization
 
-## 📁 Estrutura do Projeto
+## 📁 Project Structure
 
 ```
 src/
-├── components/           # Componentes reutilizáveis
-│   ├── ui/               # Componentes base (Radix UI)
-├── features/             # Funcionalidades organizadas por domínio
-│   ├── monster/          # Funcionalidades dos monstros
-│   └── battle/           # Funcionalidades de batalha
-├── pages/                # Páginas da aplicação
-├── models/               # Tipos e interfaces TypeScript
+├── components/           # Reusable components
+│   ├── ui/               # Base UI components (Radix UI)
+├── features/             # Feature-based organization
+│   ├── monster/          # Monster-related logic
+│   └── battle/           # Battle logic
+├── pages/                # Application pages
+├── models/               # TypeScript types and interfaces
 │   └── Monster.ts
-├── store/                # Gerenciamento de estado
-├── lib/                  # Utilitários
+├── store/                # Global state management (Zustand)
+├── lib/                  # Utility functions
 │   └── utils.ts
-├── App.tsx               # Componente principal com roteamento
-├── main.tsx              # Entry point
-└── index.css             # Estilos globais
+├── App.tsx               # Main component with routing
+├── main.tsx              # App entry point
+└── index.css             # Global styles
 ```
 
-## 🧭 Roteamento
+## 🧭 Routing
 
-A aplicação utiliza **React Router v6** com as seguintes rotas:
+The app uses **React Router v6** with the following routes:
 
-- `/` - Página inicial com estatísticas e introdução
-- `/monsters` - Lista e gerenciamento de monstros
-- `/create` - Formulário de criação de monstros
-- `/battle` - Arena de batalha entre monstros
+- `/` - Home page with stats and introduction
+- `/monsters` - Monster list and management
+- `/create` - Monster creation form
+- `/battle` - Battle arena for monster duels
 
-### Navegação
-- Header fixo com logo e link para GitHub
-- Barra de navegação responsiva com indicadores visuais
-- Badges dinâmicos mostrando quantidade de monstros
-- Proteção de rota para batalha (requer 2+ monstros)
+### Navigation
 
-## 🛠️ Como Executar
+- Fixed header with logo and GitHub link
+- Responsive nav bar with visual indicators
+- Dynamic badges showing monster count
+- Route guard for battle arena (requires 2+ monsters)
 
-### Pré-requisitos
-- Node.js 18+ 
-- npm, yarn ou pnpm
+## 🛠️ Getting Started
 
-### Instalação
+### Prerequisites
 
-1. **Clone o repositório**
-```
-git clone <url-do-repositorio>
+- Node.js 18+
+- npm, yarn or pnpm
+
+### Installation
+
+1. **Clone the repository**
+```bash
+git clone <repo-url>
 cd monster-battle-arena
 ```
 
-2. **Instale as dependências**
-```
+2. **Install dependencies**
+```bash
 npm install
-# ou
+# or
 yarn install
-# ou
+# or
 pnpm install
 ```
 
-3. **Execute o projeto**
-```
+3. **Start the development server**
+```bash
 npm run dev
-# ou
+# or
 yarn dev
-# ou
+# or
 pnpm dev
 ```
 
-4. **Acesse a aplicação**
-Abra [http://localhost:5173](http://localhost:5173) no seu navegador
+4. **Access the app**
+Open [http://localhost:5173](http://localhost:5173) in your browser
 
-## 🎮 Como Usar
+## 🎮 How to Use
 
-### 1. Criando Monstros
-- Vá para a aba "Criar Monstro"
-- Preencha o nome e os atributos (ataque, defesa, velocidade, HP)
-- Opcionalmente, adicione uma URL de imagem
-- Use o botão "Gerar Aleatório" para criar monstros rapidamente
+### 1. Creating Monsters
+- Go to the "Create Monster" tab
+- Fill in the name and attributes (attack, defense, speed, HP)
+- Optionally add an image URL
+- Use the "Generate Random" button for quick monster creation
 
-### 2. Visualizando Monstros
-- Na aba "Monstros", veja todos os monstros criados
-- Cada card mostra os atributos e HP atual
-- Use os botões para curar ou excluir monstros
+### 2. Viewing Monsters
+- Go to the "Monsters" tab to see all created monsters
+- Each card shows current attributes and HP
+- Use buttons to heal or delete monsters
 
-### 3. Batalhas
-- Vá para a aba "Arena de Batalha" (disponível com 2+ monstros)
-- Selecione dois monstros diferentes
-- Clique em "Iniciar Batalha!" e assista ao combate
-- Veja o resultado detalhado com log de todos os rounds
+### 3. Battles
+- Go to the "Battle Arena" tab (only if 2+ monsters exist)
+- Select two different monsters
+- Click "Start Battle!" to watch them fight
+- Detailed log shows all battle rounds and the final winner
 
-## 🎨 Design e UX
+## 🎨 Design and UX
 
-- **Tema Espacial**: Gradientes roxo/azul com efeitos de vidro
-- **Responsivo**: Funciona perfeitamente em desktop e mobile
-- **Feedback Visual**: Animações, cores e ícones intuitivos
-- **Acessibilidade**: Componentes semânticos e navegação por teclado
+- **Space Theme**: Blue/purple gradients with glass effects
+- **Responsive**: Fully works on desktop and mobile
+- **Visual Feedback**: Animations, intuitive icons, and color cues
+- **Accessibility**: Semantic components and keyboard-friendly navigation
 
-## 🧪 Exemplos de Teste
+## 🧪 Test Examples
 
-### Monstros de Exemplo
-```
-// Monstro Equilibrado
+### Example Monsters
+
+```ts
+// Balanced Monster
 {
-  name: "Dragão Flamejante",
+  name: "Flame Dragon",
   attack: 15,
   defense: 12,
   speed: 10,
   hp: 100
 }
 
-// Monstro Rápido
+// Fast Monster
 {
-  name: "Lobo Sombrio", 
+  name: "Shadow Wolf", 
   attack: 12,
   defense: 8,
   speed: 18,
   hp: 80
 }
 
-// Monstro Tanque
+// Tank Monster
 {
-  name: "Golem de Pedra",
+  name: "Stone Golem",
   attack: 10,
   defense: 20,
   speed: 5,
@@ -160,30 +165,32 @@ Abra [http://localhost:5173](http://localhost:5173) no seu navegador
 }
 ```
 
-## 🔧 Scripts Disponíveis
+## 🔧 Available Scripts
 
-- `npm run dev` - Executa em modo desenvolvimento
-- `npm run build` - Gera build de produção
-- `npm run preview` - Preview do build de produção
-- `npm run lint` - Executa linting do código
+- `npm run dev` - Run in development mode
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
+- `npm run lint` - Lint the codebase
 
-## 📝 Considerações Técnicas
+## 📝 Technical Notes
 
-### Gerenciamento de Estado
-- **Zustand** escolhido pela simplicidade e performance
-- Persistência automática no localStorage
-- Estado reativo e tipado
+### State Management
+- **Zustand** was chosen for its simplicity and performance
+- Automatic localStorage persistence
+- Fully typed and reactive state
 
-### Algoritmo de Batalha
-- Implementado em função pura para facilitar testes
-- Proteção contra loops infinitos (máx. 100 rounds)
-- Log detalhado de cada round para debugging
+### Battle Algorithm
+- Implemented as a pure function for testability
+- Loop capped at 100 rounds to avoid infinite loops
+- Full round log available for debugging and transparency
 
 ### Performance
-- **Vite** para desenvolvimento rápido e build otimizado
-- Componentes otimizados com boas práticas React
-- Lazy loading de imagens com fallback
-- Animações CSS performáticas
+- **Vite** for fast development and optimized build
+- Component structure follows React best practices
+- Lazy image loading with fallback
+- Lightweight CSS animations for performance
 
-#### Desenvolvido com ❤️ para o desafio técnico da **Revi** 
-#### Obrigado pela oportunidade! Espero que gostem da aplicação! 🚀
+---
+
+#### Built with ❤️ for the **Revi** technical challenge  
+#### Thanks for the opportunity! Hope you enjoy the app! 🚀

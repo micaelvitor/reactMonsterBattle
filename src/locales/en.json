@@ -1,0 +1,158 @@
+{
+  "nav": {
+    "home": "Home",
+    "monsters": "Monsters",
+    "create": "Create",
+    "battle": "Battle"
+  },
+  "notFound": {
+    "title": "Error 404",
+    "description": "Oops! The page you are looking for was not found.",
+    "back": "Back to Home",
+    "lost": "It seems you got lost in the arena. Let's take you back to a safe place."
+  },
+  "footer": {
+    "madeWith": "Made with ❤️ for the Revi technical challenge",
+    "stack": "React + TypeScript + Vite + Zustand + Tailwind CSS"
+  },
+  "battle": {
+    "winner": "{{name}} won the battle!",
+    "error": "Error during the battle!"
+  },
+  "home": {
+    "heroDesc": "Create epic monsters and let them battle for supremacy!",
+    "challenge": "Revi Technical Challenge",
+    "createMonsters": "Create Monsters",
+    "createMonstersDesc": "Create unique monsters with custom attributes",
+    "manageMonsters": "Manage Monsters",
+    "manageMonstersDesc": "View and manage your monster collection",
+    "battleArena": "Battle Arena",
+    "battleArenaDesc": "Let your monsters fight for supremacy",
+    "needTwoMonsters": "Need 2+ monsters",
+    "access": "Access",
+    "startJourney": "Start your journey!",
+    "createFirstDesc": "Create your first monster to start epic battles",
+    "createFirst": "Create First Monster",
+    "howBattleWorks": "How the Battle System Works",
+    "attackOrder": "Attack Order",
+    "attackOrderDesc": "Monster with higher speed attacks first. In case of tie, higher attack decides.",
+    "damageCalc": "Damage Calculation",
+    "damageCalcDesc": "Damage = Attack - Defense (minimum 1 damage always)",
+    "victoryCond": "Victory Condition",
+    "victoryCondDesc": "First monster to reduce opponent's HP to zero wins",
+    "roundsAlt": "Alternating Rounds",
+    "roundsAltDesc": "Monsters attack alternately until there's a winner",
+    "stats": {
+      "monsters": "Monsters",
+      "avgAtk": "Avg ATK",
+      "avgDef": "Avg DEF",
+      "battles": "Battles"
+    }
+  },
+  "monsterList": {
+    "noneCreated": "No Monsters Created",
+    "createFirstDesc": "Create your first monster to start epic battles!",
+    "createNew": "Create new monster",
+    "clickToCreate": "Click the button to create your first warrior!",
+    "title": "Monster Collection",
+    "subtitle": "Manage, search and sort your warriors.",
+    "searchPlaceholder": "Search monster by name...",
+    "sortBy": "Sort by",
+    "sort": {
+      "name": "Name",
+      "attack": "Attack",
+      "defense": "Defense",
+      "speed": "Speed",
+      "hp": "HP"
+    },
+    "notFound": "No monster found with name \"{{searchTerm}}\".",
+    "prev": "Previous",
+    "next": "Next",
+    "page": "Page {{currentPage}} of {{totalPages}}"
+  },
+  "monsterForm": {
+    "nameRequired": "Monster name is required!",
+    "attributesRequired": "All attributes must be greater than 0!",
+    "invalidImageUrl": "The image URL is invalid or cannot be loaded.",
+    "updated": "{{name}} was updated successfully!",
+    "created": "{{name}} was created successfully!",
+    "editTitle": "Edit Monster: {{name}}",
+    "createTitle": "Create New Monster",
+    "editDesc": "Adjust your monster's attributes.",
+    "createDesc": "Set your monster's attributes and prepare it for battle!",
+    "nameLabel": "Monster Name",
+    "namePlaceholder": "Ex: Flame Dragon",
+    "imageLabel": "Image URL (optional)",
+    "imagePlaceholder": "https://example.com/image.jpg",
+    "attack": "Attack",
+    "defense": "Defense",
+    "speed": "Speed",
+    "hp": "HP",
+    "generateRandom": "Generate Random",
+    "updating": "Updating...",
+    "creating": "Creating...",
+    "saveChanges": "Save Changes",
+    "createMonster": "Create Monster",
+    "randomNames": {
+      "dragon": "Flame Dragon",
+      "wolf": "Shadow Wolf",
+      "golem": "Stone Golem",
+      "phoenix": "Golden Phoenix",
+      "kraken": "Abyssal Kraken",
+      "tiger": "Frost Tiger",
+      "snake": "Venomous Snake",
+      "eagle": "Storm Eagle",
+      "bear": "Berserker Bear",
+      "scorpion": "Electric Scorpion",
+      "panther": "Night Panther",
+      "rhino": "Armored Rhino"
+    }
+  },
+  "battlePage": {
+    "insufficientMonsters": "Insufficient Monsters",
+    "needTwoMonsters": "You need at least 2 monsters to start a battle",
+    "currentMonsters": "Current monsters",
+    "requiredMonsters": "Required monsters",
+    "createMonster": "Create Monster",
+    "viewMonsters": "View Monsters"
+  },
+  "battleArena": {
+    "title": "Battle Arena",
+    "subtitle": "Select two monsters and let them fight for supremacy!",
+    "chooseCombatants": "Choose Combatants",
+    "selectTwoMonsters": "Select two different monsters for battle",
+    "monster1": "Monster 1",
+    "monster2": "Monster 2",
+    "selectFirstMonster": "Select the first monster",
+    "selectSecondMonster": "Select the second monster",
+    "battleInProgress": "Battle in Progress...",
+    "startBattle": "Start Battle!",
+    "newBattle": "New Battle"
+  },
+  "monsterCard": {
+    "removed": "{{name}} was removed!",
+    "hpRestored": "{{name}}'s HP was restored!",
+    "defeated": "Defeated",
+    "hp": "HP",
+    "atk": "ATK",
+    "def": "DEF",
+    "spd": "SPD",
+    "heal": "Heal",
+    "delete": "Delete",
+    "edit": "Edit"
+  },
+  "battleResult": {
+    "winner": "{{name}} Won!",
+    "epicBattle": "Epic battle with {{rounds}} {{roundText}}",
+    "round": "round",
+    "rounds": "rounds",
+    "winnerTitle": "Winner",
+    "loser": "Defeated",
+    "battleLog": "Battle Log",
+    "followRounds": "Follow each round of the epic battle",
+    "damage": "Damage"
+  },
+  "battleLogic": {
+    "attackDescription": "{{attacker}} attacks {{defender}} dealing {{damage}} damage!"
+  }
+} 

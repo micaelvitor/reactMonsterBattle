@@ -5,12 +5,14 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { Separator } from "@/components/ui/separator"
 import { Trophy, Crown, Skull, Sword, Heart } from "lucide-react"
 import { MonsterCard } from "@/components/MonsterCard"
+import { useTranslation } from "react-i18next"
 
 interface BattleResultProps {
   result: BattleResultType
 }
 
 export function BattleResult({ result }: BattleResultProps) {
+  const { t } = useTranslation()
   return (
     <div className="space-y-6">
       {/* Final result*/}
@@ -18,11 +20,11 @@ export function BattleResult({ result }: BattleResultProps) {
         <CardHeader className="text-center">
           <CardTitle className="text-3xl text-white flex items-center justify-center gap-3">
             <Crown className="w-8 h-8 text-yellow-400" />
-            {result.winner.name} Venceu!
+            {t("battleResult.winner", { name: result.winner.name })}
             <Crown className="w-8 h-8 text-yellow-400" />
           </CardTitle>
           <CardDescription className="text-gray-300 text-lg">
-            Batalha épica com {result.totalRounds} {result.totalRounds === 1 ? "round" : "rounds"}
+            {t("battleResult.epicBattle", { rounds: result.totalRounds, roundText: result.totalRounds === 1 ? t("battleResult.round") : t("battleResult.rounds") })}
           </CardDescription>
         </CardHeader>
       </Card>
@@ -32,7 +34,7 @@ export function BattleResult({ result }: BattleResultProps) {
         <div className="space-y-2">
           <div className="flex items-center justify-center gap-2 mb-4">
             <Trophy className="w-5 h-5 text-yellow-400" />
-            <h3 className="text-xl font-bold text-white">Vencedor</h3>
+            <h3 className="text-xl font-bold text-white">{t("battleResult.winnerTitle")}</h3>
           </div>
           <MonsterCard monster={result.winner} />
         </div>
@@ -40,7 +42,7 @@ export function BattleResult({ result }: BattleResultProps) {
         <div className="space-y-2">
           <div className="flex items-center justify-center gap-2 mb-4">
             <Skull className="w-5 h-5 text-red-400" />
-            <h3 className="text-xl font-bold text-white">Derrotado</h3>
+            <h3 className="text-xl font-bold text-white">{t("battleResult.loser")}</h3>
           </div>
           <MonsterCard monster={result.loser} />
         </div>
@@ -51,9 +53,9 @@ export function BattleResult({ result }: BattleResultProps) {
         <CardHeader>
           <CardTitle className="text-white flex items-center gap-2">
             <Sword className="w-5 h-5" />
-            Log da Batalha
+            {t("battleResult.battleLog")}
           </CardTitle>
-          <CardDescription className="text-gray-300">Acompanhe cada round da batalha épica</CardDescription>
+          <CardDescription className="text-gray-300">{t("battleResult.followRounds")}</CardDescription>
         </CardHeader>
         <CardContent>
           <ScrollArea className="h-64 w-full">
@@ -62,9 +64,9 @@ export function BattleResult({ result }: BattleResultProps) {
                 <div key={index} className="space-y-2">
                   <div className="flex items-center justify-between">
                     <Badge variant="outline" className="bg-white/10 border-white/20 text-white">
-                      Round {round.round}
+                      {t("battleResult.round")} {round.round}
                     </Badge>
-                    <div className="text-sm text-gray-400">Dano: {round.damage}</div>
+                    <div className="text-sm text-gray-400">{t("battleResult.damage")}: {round.damage}</div>
                   </div>
 
                   <div className="bg-white/5 rounded-lg p-3 space-y-2">
@@ -74,14 +76,14 @@ export function BattleResult({ result }: BattleResultProps) {
                       <div className="flex items-center gap-2">
                         <Heart className="w-3 h-3 text-red-400" />
                         <span className="text-gray-300">{round.attacker.name}:</span>
-                        <span className="text-white font-bold">{round.attackerHpAfter} HP</span>
+                        <span className="text-white font-bold">{round.attackerHpAfter} {t("monsterCard.hp")}</span>
                       </div>
 
                       <div className="flex items-center gap-2">
                         <Heart className="w-3 h-3 text-red-400" />
                         <span className="text-gray-300">{round.defender.name}:</span>
                         <span className={`font-bold ${round.defenderHpAfter <= 0 ? "text-red-400" : "text-white"}`}>
-                          {round.defenderHpAfter} HP
+                          {round.defenderHpAfter} {t("monsterCard.hp")}
                         </span>
                       </div>
                     </div>
