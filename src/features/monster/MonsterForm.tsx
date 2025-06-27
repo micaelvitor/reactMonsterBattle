@@ -3,8 +3,8 @@ import { useMonsterStore } from "@/store/useMonsterStore"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Plus, Sparkles } from "lucide-react"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card" 
+import { Plus, Sparkles, RotateCcw } from "lucide-react"
 import { toast } from "sonner"
 
 interface MonsterFormProps {
@@ -13,6 +13,7 @@ interface MonsterFormProps {
 
 export function MonsterForm({ onSuccess }: MonsterFormProps) {
   const { addMonster } = useMonsterStore()
+  const [isLoading, setIsLoading] = useState(false)
   const [formData, setFormData] = useState({
     name: "",
     attack: 10,
@@ -22,16 +23,45 @@ export function MonsterForm({ onSuccess }: MonsterFormProps) {
     imageUrl: "",
   })
 
-  const handleSubmit = (e: FormEvent) => {
+  const isValidImageUrl = (url: string): Promise<boolean> => {
+    return new Promise((resolve) => {
+      if (!url.trim()) {
+        resolve(true)
+        return
+      }
+      try {
+        new URL(url)
+      } catch (_) {
+        resolve(false)
+        return
+      }
+
+      const img = new Image()
+      img.onload = () => resolve(true)
+      img.onerror = () => resolve(false)
+      img.src = url
+    })
+  }
+
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
+    setIsLoading(true)
 
     if (!formData.name.trim()) {
       toast.error("Nome do monstro é obrigatório!")
+      setIsLoading(false)
       return
     }
 
     if (formData.attack < 1 || formData.defense < 1 || formData.speed < 1 || formData.hp < 1) {
       toast.error("Todos os atributos devem ser maiores que 0!")
+      setIsLoading(false)
+      return
+    }
+
+    if (!(await isValidImageUrl(formData.imageUrl))) {
+      toast.error("A URL da imagem é inválida ou não pode ser carregada.")
+      setIsLoading(false)
       return
     }
 
@@ -47,6 +77,7 @@ export function MonsterForm({ onSuccess }: MonsterFormProps) {
       imageUrl: "",
     })
 
+    setIsLoading(false)
     onSuccess?.()
   }
 
@@ -93,7 +124,7 @@ export function MonsterForm({ onSuccess }: MonsterFormProps) {
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Bloco de nome e imagem */}
+            {/* Monster naming and image block */}
             <div className="space-y-4 animate-in fade-in-0 slide-in-from-bottom-5 duration-500" style={{ animationDelay: `0ms`, animationFillMode: "backwards" }}>
               <div>
                 <Label htmlFor="name" className="text-white">Nome do Monstro</Label>
@@ -117,7 +148,7 @@ export function MonsterForm({ onSuccess }: MonsterFormProps) {
               </div>
             </div>
 
-            {/* Bloco de atributos */}
+            {/* Attribute block */}
             <div className="space-y-4 animate-in fade-in-0 slide-in-from-bottom-5 duration-500" style={{ animationDelay: `150ms`, animationFillMode: "backwards" }}>
               <div className="grid grid-cols-2 gap-4">
                 <div>
@@ -174,23 +205,29 @@ export function MonsterForm({ onSuccess }: MonsterFormProps) {
             </div>
           </div>
 
-          {/* Ações */}
+          {/* Actions */}
           <div className="flex flex-col sm:flex-row gap-4 animate-in fade-in-0 slide-in-from-bottom-5 duration-500" style={{ animationDelay: `300ms`, animationFillMode: "backwards" }}>
             <Button
               type="button"
               variant="outline"
+              disabled={isLoading}
               onClick={generateRandomMonster}
-              className="flex-1 bg-white/10 border-white/20 text-white hover:bg-white/20"
+              className="flex-1 bg-white/10 border-white/20 text-white hover:bg-white/20 disabled:opacity-50"
             >
               <Sparkles className="w-4 h-4 mr-2" />
               Gerar Aleatório
             </Button>
             <Button
               type="submit"
-              className="flex-1 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+              disabled={isLoading}
+              className="flex-1 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 disabled:opacity-50"
             >
-              <Plus className="w-4 h-4 mr-2" />
-              Criar Monstro
+              {isLoading ? (
+                <RotateCcw className="w-4 h-4 mr-2 animate-spin" />
+              ) : (
+                <Plus className="w-4 h-4 mr-2" />
+              )}
+              {isLoading ? "Criando..." : "Criar Monstro"}
             </Button>
           </div>
         </form>
