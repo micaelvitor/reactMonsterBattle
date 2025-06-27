@@ -1,6 +1,6 @@
-import { useMonsterStore } from "../../store/useMonsterStore"
-import { MonsterCard } from "../../components/MonsterCard"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../../components/ui/card"
+import { useMonsterStore } from "@/store/useMonsterStore"
+import { MonsterCard } from "@/components/MonsterCard"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Users, Plus } from "lucide-react"
 
 export function MonsterList() {

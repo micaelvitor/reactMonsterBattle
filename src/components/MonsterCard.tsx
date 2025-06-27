@@ -1,5 +1,3 @@
-"use client"
-
 import type { Monster } from "@/models/Monster"
 import { useMonsterStore } from "@/store/useMonsterStore"
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
@@ -32,7 +30,8 @@ export function MonsterCard({ monster, showActions = false }: MonsterCardProps) 
   const isDead = monster.hp <= 0
 
   const imageUrl =
-    monster.imageUrl || `https://placehold.co/200x128?/ffffff?text=${encodeURIComponent(monster.name)}`
+    monster.imageUrl ||
+    `https://placehold.co/200x128?text=${encodeURIComponent(monster.name).replace(/%20/g, "+")}`
 
   return (
     <Card
@@ -58,7 +57,9 @@ export function MonsterCard({ monster, showActions = false }: MonsterCardProps) 
             className="w-full h-full object-cover"
             onError={(e) => {
               const target = e.target as HTMLImageElement
-              target.src = `https://via.placeholder.com/200x128/6366f1/ffffff?text=${encodeURIComponent(monster.name)}`
+              target.src = `https://placehold.co/200x128??text=${encodeURIComponent(
+                monster.name,
+              ).replace(/%20/g, "+")}`
             }}
           />
         </div>
