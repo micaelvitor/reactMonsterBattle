@@ -22,6 +22,53 @@ export function MonsterList() {
   const [sortConfig, setSortConfig] = useState<SortConfig>({ key: "name", order: "asc" })
   const MONSTERS_PER_PAGE = 8
 
+  const filteredAndSortedMonsters = useMemo(() => {
+    const { key, order } = sortConfig
+
+    return monsters
+      .filter((monster) => monster.name.toLowerCase().includes(searchTerm.toLowerCase()))
+      .sort((a, b) => {
+        const aValue = a[key]
+        const bValue = b[key]
+
+        let comparison = 0
+        if (typeof aValue === "string" && typeof bValue === "string") {
+          comparison = aValue.localeCompare(bValue, "pt-BR", { sensitivity: "base" })
+        } else if (typeof aValue === "number" && typeof bValue === "number") {
+          comparison = aValue - bValue
+        }
+
+        return order === "asc" ? comparison : -comparison
+      })
+  }, [monsters, searchTerm, sortConfig])
+
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [searchTerm, sortConfig])
+
+  useEffect(() => {
+    const totalPages = Math.ceil(monsters.length / MONSTERS_PER_PAGE)
+    if (currentPage > totalPages && totalPages > 0) {
+      setCurrentPage(totalPages)
+    } else if (totalPages === 0) {
+      setCurrentPage(1)
+    }
+  }, [monsters.length, currentPage])
+
+  const totalPages = Math.ceil(filteredAndSortedMonsters.length / MONSTERS_PER_PAGE)
+  const paginatedMonsters = filteredAndSortedMonsters.slice(
+    (currentPage - 1) * MONSTERS_PER_PAGE,
+    currentPage * MONSTERS_PER_PAGE
+  )
+
+  const handlePreviousPage = () => {
+    setCurrentPage((prev) => Math.max(prev - 1, 1))
+  }
+
+  const handleNextPage = () => {
+    setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+  }
+
   if (monsters.length === 0) {
     return (
       <Card className="max-w-2xl mx-auto bg-black/20 backdrop-blur-sm border-white/20 animate-in fade-in-0 slide-in-from-bottom-5 duration-500">
@@ -58,45 +105,6 @@ export function MonsterList() {
         </CardContent>
       </Card>
     )
-  }
-
-  const filteredAndSortedMonsters = useMemo(() => {
-    const { key, order } = sortConfig
-
-    return monsters
-      .filter((monster) => monster.name.toLowerCase().includes(searchTerm.toLowerCase()))
-      .sort((a, b) => {
-        const aValue = a[key]
-        const bValue = b[key]
-
-        let comparison = 0
-        if (typeof aValue === "string" && typeof bValue === "string") {
-          comparison = aValue.localeCompare(bValue, "pt-BR", { sensitivity: "base" })
-        } else if (typeof aValue === "number" && typeof bValue === "number") {
-          comparison = aValue - bValue
-        }
-
-        return order === "asc" ? comparison : -comparison
-      })
-  }, [monsters, searchTerm, sortConfig])
-
-  useEffect(() => {
-    setCurrentPage(1)
-  }, [searchTerm, sortConfig])
-
-
-  const totalPages = Math.ceil(filteredAndSortedMonsters.length / MONSTERS_PER_PAGE)
-  const paginatedMonsters = filteredAndSortedMonsters.slice(
-    (currentPage - 1) * MONSTERS_PER_PAGE,
-    currentPage * MONSTERS_PER_PAGE
-  )
-
-  const handlePreviousPage = () => {
-    setCurrentPage((prev) => Math.max(prev - 1, 1))
-  }
-
-  const handleNextPage = () => {
-    setCurrentPage((prev) => Math.min(prev + 1, totalPages))
   }
 
   return (
