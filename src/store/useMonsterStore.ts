@@ -1,6 +1,6 @@
 import { create } from "zustand"
 import { persist } from "zustand/middleware"
-import type { Monster } from "../models/Monster"
+import type { Monster } from "@/models/Monster"
 
 interface MonsterStore {
   monsters: Monster[]
@@ -8,6 +8,7 @@ interface MonsterStore {
   removeMonster: (id: string) => void
   resetMonsterHp: (id: string) => void
   updateMonsterHp: (id: string, hp: number) => void
+  updateMonster: (updated: Monster) => void
 }
 
 export const useMonsterStore = create<MonsterStore>()(
@@ -23,6 +24,12 @@ export const useMonsterStore = create<MonsterStore>()(
         }
         set((state) => ({
           monsters: [...state.monsters, newMonster],
+        }))
+      },
+
+      updateMonster: (updatedMonster) => {
+        set((state) => ({
+          monsters: state.monsters.map((m) => (m.id === updatedMonster.id ? updatedMonster : m)),
         }))
       },
 

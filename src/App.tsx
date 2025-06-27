@@ -5,8 +5,7 @@ import { HomePage } from "@/pages/Home"
 import { MonstersPage } from "@/pages/MonstersPage"
 import { BattlePage } from "@/pages/BattlePage"
 import { CreateMonsterPage } from "./pages/CreateMonsterPage"
-
-
+import { EditMonsterPage } from "./pages/EditMonsterPage"
 
 export function App() {
   return (
@@ -15,6 +14,7 @@ export function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/monsters" element={<MonstersPage />} />
+          <Route path="/edit/:id" element={<EditMonsterPage />} />
           <Route path="/create" element={<CreateMonsterPage />} />
           <Route path="/battle" element={<BattlePage />} />
           <Route path="*" element={<NotFound />} />

@@ -4,8 +4,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
 import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
 import { Badge } from "@/components/ui/badge"
-import { Trash2, RotateCcw, Heart, Sword, Shield, Zap } from "lucide-react"
+import { Trash2, RotateCcw, Heart, Sword, Shield, Zap, Pencil } from "lucide-react"
 import { toast } from "sonner"
+import { Link } from "react-router-dom"
 
 interface MonsterCardProps {
   monster: Monster
@@ -107,7 +108,7 @@ export function MonsterCard({ monster, showActions = false }: MonsterCardProps) 
 
         {/* Actions */}
         {showActions && (
-          <div className="flex gap-2 pt-2">
+          <div className="flex gap-2 pt-2 flex-wrap">
             {isInjured && (
               <Button
                 onClick={handleResetHp}
@@ -123,10 +124,21 @@ export function MonsterCard({ monster, showActions = false }: MonsterCardProps) 
               onClick={handleDelete}
               variant="outline"
               size="sm"
-              className="bg-red-600/20 border-red-600/50 text-red-400 hover:bg-red-600/30"
+              className="flex-1 bg-red-600/20 border-red-600/50 text-red-400 hover:bg-red-600/30"
             >
               <Trash2 className="w-3 h-3 mr-1" />
               Excluir
+            </Button>
+            <Button
+              asChild
+              variant="outline"
+              size="sm"
+              className="flex-1 bg-blue-600/20 border-blue-600/50 text-blue-400 hover:bg-blue-600/30"
+            >
+            <Link to={`/edit/${monster.id}`}>
+              <Pencil className="w-3 h-3 mr-1" />
+              Editar
+            </Link>
             </Button>
           </div>
         )}

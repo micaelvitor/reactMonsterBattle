@@ -1,18 +1,19 @@
-import { useState, type FormEvent } from "react"
+import { useState, type FormEvent, useEffect } from "react"
 import { useMonsterStore } from "@/store/useMonsterStore"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card" 
-import { Plus, Sparkles, RotateCcw } from "lucide-react"
+import { Plus, Sparkles, RotateCcw, Pencil } from "lucide-react"
 import { toast } from "sonner"
+import type { Monster } from "@/models/Monster"
 
 interface MonsterFormProps {
   onSuccess?: () => void
+  monsterToEdit?: Monster
 }
 
-export function MonsterForm({ onSuccess }: MonsterFormProps) {
-  const { addMonster } = useMonsterStore()
+export function MonsterForm({ onSuccess, monsterToEdit }: MonsterFormProps) {
   const [isLoading, setIsLoading] = useState(false)
   const [formData, setFormData] = useState({
     name: "",
@@ -22,6 +23,21 @@ export function MonsterForm({ onSuccess }: MonsterFormProps) {
     hp: 100,
     imageUrl: "",
   })
+
+  const { addMonster, updateMonster } = useMonsterStore()
+
+  useEffect(() => {
+    if (monsterToEdit) {
+      setFormData({
+        name: monsterToEdit.name,
+        attack: monsterToEdit.attack,
+        defense: monsterToEdit.defense,
+        speed: monsterToEdit.speed,
+        hp: monsterToEdit.hp,
+        imageUrl: monsterToEdit.imageUrl || "",
+      })
+    }
+  }, [monsterToEdit])
 
   const isValidImageUrl = (url: string): Promise<boolean> => {
     return new Promise((resolve) => {
@@ -65,8 +81,18 @@ export function MonsterForm({ onSuccess }: MonsterFormProps) {
       return
     }
 
-    addMonster(formData)
-    toast.success(`${formData.name} foi criado com sucesso!`)
+    if (monsterToEdit) {
+      updateMonster({
+        ...formData,
+        id: monsterToEdit.id,
+        maxHp: monsterToEdit.maxHp, // Keep original maxHp
+        hp: Math.min(formData.hp, monsterToEdit.maxHp), // Cap current HP at maxHp
+      })
+      toast.success(`${formData.name} foi atualizado com sucesso!`)
+    } else {
+      addMonster(formData)
+      toast.success(`${formData.name} foi criado com sucesso!`)
+    }
 
     setFormData({
       name: "",
@@ -114,11 +140,20 @@ export function MonsterForm({ onSuccess }: MonsterFormProps) {
     <Card className="w-full max-w-4xl mx-auto bg-black/20 backdrop-blur-sm border-white/20 animate-in fade-in-0 slide-in-from-bottom-5 duration-700">
       <CardHeader>
         <CardTitle className="text-2xl text-white flex items-center gap-2">
-          <Plus className="w-6 h-6" />
-          Criar Novo Monstro
+          {monsterToEdit ? (
+            <>
+              <Pencil className="w-6 h-6" />
+              Editar Monstro: {monsterToEdit.name}
+            </>
+          ) : (
+            <>
+              <Plus className="w-6 h-6" />
+              Criar Novo Monstro
+            </>
+          )}
         </CardTitle>
         <CardDescription className="text-gray-300">
-          Defina os atributos do seu monstro e prepare-o para a batalha!
+          {monsterToEdit ? "Ajuste os atributos do seu monstro." : "Defina os atributos do seu monstro e prepare-o para a batalha!"}
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -210,7 +245,7 @@ export function MonsterForm({ onSuccess }: MonsterFormProps) {
             <Button
               type="button"
               variant="outline"
-              disabled={isLoading}
+              disabled={isLoading || !!monsterToEdit}
               onClick={generateRandomMonster}
               className="flex-1 bg-white/10 border-white/20 text-white hover:bg-white/20 disabled:opacity-50"
             >
@@ -225,9 +260,13 @@ export function MonsterForm({ onSuccess }: MonsterFormProps) {
               {isLoading ? (
                 <RotateCcw className="w-4 h-4 mr-2 animate-spin" />
               ) : (
-                <Plus className="w-4 h-4 mr-2" />
+                monsterToEdit ? (
+                  <Pencil className="w-4 h-4 mr-2" />
+                ) : (
+                  <Plus className="w-4 h-4 mr-2" />
+                )
               )}
-              {isLoading ? "Criando..." : "Criar Monstro"}
+              {isLoading ? (monsterToEdit ? "Atualizando..." : "Criando...") : (monsterToEdit ? "Salvar Alterações" : "Criar Monstro")}
             </Button>
           </div>
         </form>
